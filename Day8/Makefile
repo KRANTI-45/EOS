@@ -1,5 +1,5 @@
 
-TARGET=question1
+TARGET=question33
 
 CSRCS= $(TARGET).c
 CSRCS+= 
