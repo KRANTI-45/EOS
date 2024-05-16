@@ -5,9 +5,22 @@
 #include <signal.h>
 
 
+
+int arr[2];
+void sigint_handler(int sig) {
+	printf("SIGINT caught: %d\n", sig);
+	close(arr[1]);
+	close(arr[0]);
+	_exit(0);
+}
 int main() {
-	int i=1,ret1,arr[2];
+	int ret1;
 	char ch='a';
+	struct sigaction sa;
+
+	memset(&sa, 0, sizeof(struct sigaction));
+	sa.sa_handler = sigint_handler;
+	ret1 = sigaction(SIGINT, &sa, NULL);
 	ret1=pipe(arr);
 	int count=0;
 
